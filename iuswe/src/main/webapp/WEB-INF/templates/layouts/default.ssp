@@ -1,0 +1,66 @@
+<!doctype html>
+<html ng-app="IUsWe">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" type="image/png" href="/public/images/favicon.png">
+<base href="/">
+<title>I.Us.We</title>
+
+<script src="/public/js/lib.js"></script>
+<script src="/public/js/app.js"></script>
+
+<link rel="stylesheet" href="/public/styles/ghostdown.css">
+
+
+<%--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">--%>
+<link rel="stylesheet" href="/public/styles/bootstrap.min.css">
+<link rel='stylesheet' href='/public/styles/style.css'/>
+<link rel='stylesheet' href='/public/styles/dialogs.min.css'/>
+<link rel='stylesheet' href='/public/font-awesome/4.2.0/css/font-awesome.min.css'/>
+
+<script language="JavaScript">
+    window.AppProperties = {
+    baseUrl: 'http://127.0.0.1:8080'
+    };
+
+    window.AppProperties.isLoggedIn = window.AppProperties.loggedInUsername != null && window.AppProperties.loggedInUsername != 'null' && window.AppProperties.loggedInUsername != '';
+</script>
+</head>
+<body>
+<div ng-controller="HomePageController">
+    <form class="form-horizontal" role="form" name="signinForm">
+        <div class="form-group">
+            <div class="col-sm-12">
+                <input type="text" class="form-control" placeholder="username or email" ng-model="input.username" focussable wiggleable required ng-trim="false">
+                </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <input type="password" class="form-control" placeholder="password" ng-model="input.password" ng-enter="signIn()" wiggleable required>
+                </div>
+        </div>
+        <div class="form-group">
+                <div class="col-sm-6" style="float: right">
+                    <a href="#" ng-click="forgotPassword()">forgot password?</a>
+        </div>
+        </div>
+    </form>
+
+        <div class="alert alert-danger" ng-show="options.errorMessage">
+            {{options.errorMessage}}
+        </div>
+
+    <div>
+            <div>
+                <button class="btn btn-primary" ng-click="signIn()" ng-disabled="!signinForm.$valid">Login</button>
+                <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+            </div>
+            <div>
+                <button type="button" class="btn btn-primary btn-lg" ng-click="signup()">Sign up</button>
+            </div>
+    </div>
+</div>
+</body>
+</html>
