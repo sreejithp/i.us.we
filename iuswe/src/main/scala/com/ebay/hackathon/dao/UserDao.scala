@@ -34,8 +34,8 @@ with Logging{
   def createUser(user: User) = {
     val userId = insert(user, WriteConcern.ACKNOWLEDGED).get
     LOGGER.debug("Created new user " + user.name + " / " + user.email)
-    getUserById(userId.toString)
-    user
+    val registered_user = getUserById(userId.toString)
+    registered_user
   }
 
 

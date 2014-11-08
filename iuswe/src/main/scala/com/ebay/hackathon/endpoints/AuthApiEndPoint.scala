@@ -19,11 +19,11 @@ class AuthApiEndPoint extends ApiEndpoint {
                             requiredIntParam("pledgeWeekDay"))
   }
 
-  post("/signIn") {
+  post("/signin") {
     AuthController.directLogin(requiredParam("email"), requiredParam("password"))
   }
 
-  post("signOut") {
+  post("signout") {
     AuthController.signOut
   }
 
