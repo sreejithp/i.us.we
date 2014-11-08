@@ -1,19 +1,19 @@
 package com.ebay.hackathon.entity
 
-import com.ebay.hackathon.entity.traits.{Identifiable, SerialisableEntity}
+import com.ebay.hackathon.entity.traits.{SerialisableEntity, Identifiable}
 import com.mongodb.casbah.commons.MongoDBObject
 import com.mongodb.casbah.commons.TypeImports._
 
 /**
- * Created by sreejith on 08/11/14.
+ * Created by sreejith on 09/11/14.
  */
 
-class User extends UserCore[User]
-with Identifiable[User]
+class FoodAvailabilityList  extends FoodAvailabilityListCore[FoodAvailabilityList]
+with Identifiable[FoodAvailabilityList]
 
-class UserCore[T] extends SerialisableEntity[T] {
-  var email: String = null
-  var name: String = null
+class FoodAvailabilityListCore[T] extends SerialisableEntity[T] {
+  var userId: String = null
+  var location: String = null
   var password: String = null
   var address: String = null
   var userType: Int = 0
@@ -26,8 +26,8 @@ class UserCore[T] extends SerialisableEntity[T] {
 
   def asDBObject: DBObject = {
     val builder = MongoDBObject.newBuilder
-    if (name != null) builder += NAME -> name
-    if (email != null) builder += EMAIL -> email
+//    if (name != null) builder += NAME -> name
+//    if (email != null) builder += EMAIL -> email
     if (password != null) builder += PASSWORD -> password
     if (address != null) builder += ADDRESS -> address
     builder += USER_TYPE -> userType
@@ -39,8 +39,8 @@ class UserCore[T] extends SerialisableEntity[T] {
   }
 
   def fromDBObject(dbObject: DBObject) = {
-    name = getString(dbObject, NAME)
-    email = getString(dbObject, EMAIL)
+//    name = getString(dbObject, NAME)
+//    email = getString(dbObject, EMAIL)
     address = getString(dbObject, ADDRESS)
     password = getString(dbObject, PASSWORD)
     userType = getInt(dbObject, USER_TYPE)
@@ -53,7 +53,7 @@ class UserCore[T] extends SerialisableEntity[T] {
 
 }
 
-object User {
+object FoodAvailabilityList {
   val NAME: String = "name"
   val EMAIL: String = "email"
   val PASSWORD: String = "password"

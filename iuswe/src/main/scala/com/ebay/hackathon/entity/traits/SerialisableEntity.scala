@@ -5,11 +5,6 @@ import java.io.Serializable
 import org.joda.time.DateTime
 import com.mongodb.DBObject
 
-/**
- * User: Sreejith
- * Date: 2/26/12
- */
-
 trait BaseEntity {
   protected def getPrimitiveList[PrimitiveType](dbObject: DBObject, key: String): List[PrimitiveType] = {
     val dbList = dbObject.get(key)
