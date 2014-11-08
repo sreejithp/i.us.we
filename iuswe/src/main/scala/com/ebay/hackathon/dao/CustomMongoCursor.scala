@@ -1,9 +1,9 @@
 package com.ebay.hackathon.dao
 
+import com.ebay.hackathon.entity.traits.SerialisableEntity
 import com.mongodb.casbah.Imports._
 import com.mongodb.DBCursor
 import com.mongodb.casbah.CursorExplanation
-import entity.traits.SerialisableEntity
 
 /**Unfortunately, MongoCursorBase is typed to DBObject, but....
  * Ripped off from casbah-mapper.

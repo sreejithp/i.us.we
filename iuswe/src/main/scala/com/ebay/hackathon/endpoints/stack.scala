@@ -127,7 +127,7 @@ abstract class BaseServlet extends ScalatraServlet with Logging {
 
   protected def forbidden = Forbidden(quotedText("403 Forbidden", "You do not have access to the requested content. Try logging in?"))
 
-  private[this] def quotedText(code: String, title: String) = "<h1>" + code + "</h1><h3>" + title + "</h3><blockquote style='border-left: 10px solid #ccc; margin: 1.5em 10px; padding: 0.5em 10px; color: #999'>" + TextUtils.getRandomQuote + "</blockquote>"
+  private[this] def quotedText(code: String, title: String) = "<h1>" + code + "</h1><h3>" + title + "</h3><blockquote style='border-left: 10px solid #ccc; margin: 1.5em 10px; padding: 0.5em 10px; color: #999'></blockquote>"
 
 }
 

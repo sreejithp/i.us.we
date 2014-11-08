@@ -1,11 +1,8 @@
 package com.ebay.hackathon.endpoints
 
+import com.ebay.hackathon.entity.User
 import org.json4s.{JField, FieldSerializer, DefaultFormats, Formats}
-import com.odela.entity._
-import course._
-import com.odela.api.RelatedWords
-import com.odela.entity.points._
-import com.odela.entity.feeds.{NewsFeed, GlobalNewsFeed}
+
 
 
 object JsonFomats {
@@ -18,7 +15,7 @@ object JsonFomats {
   private[this] def fieldSerializer[T](implicit mf: Manifest[T]) = FieldSerializer[T](ignoreEmpty)
 
   val jsonFormats: Formats = DefaultFormats +
-    fieldSerializer[TestData]
+    fieldSerializer[User]
 
 
 }

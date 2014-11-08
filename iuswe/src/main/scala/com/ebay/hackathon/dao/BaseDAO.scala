@@ -50,9 +50,6 @@ trait DAO[ObjectType <: SerialisableEntity[ObjectType], ID <: Any] {
 
   def remove[A <% DBObject](q: A, wc: WriteConcern)
 
-  def removeById(id: ID, wc: WriteConcern = collection.writeConcern)
-
-  def removeByIds(ids: List[ID], wc: WriteConcern = collection.writeConcern)
 
 }
 
