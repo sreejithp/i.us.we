@@ -93,9 +93,8 @@ trait HttpSessionSupport extends Logging {
   }
 }
 
-class BaseController(signedInUser: String, location: Option[String]) extends Logging with Respondable {
+class BaseController(signedInUser: String) extends Logging with Respondable {
   protected[this] implicit val signedInUserId = if (signedInUser == null) null else new ObjectId(signedInUser)
-  protected[this] implicit val userLocation = location
 
   protected def isSignedIn = signedInUser != null
   protected def requireSignIn(f: => Response): Response = {
