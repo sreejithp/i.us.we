@@ -1,18 +1,22 @@
 package com.ebay.hackathon.dao
 
-import com.ebay.hackathon.{Logging, DB}
 import com.ebay.hackathon.entity.User
+import com.ebay.hackathon.entity.User._
 import com.ebay.hackathon.entity.traits.Identifiable
+import com.ebay.hackathon.{DB, Logging}
 import com.mongodb.WriteConcern
+import com.mongodb.casbah.Imports._
 import com.mongodb.casbah.commons.MongoDBObject
+
 import org.bson.types.ObjectId
+import org.joda.time.DateTime
 
 /**
- * Created by sreejith on 08/11/14.
+ * Author sreejith on 08/11/14 5:16 AM.
  */
 
-object UserDao extends BaseDAO[User, ObjectId](collection = DB.connection("user"), entityClass = classOf[User])
-with Logging{
+object UserDAO extends BaseDAO[User, ObjectId](collection = DB.connection("user"), entityClass = classOf[User])
+with Logging {
 
   def getUserByEmail(email: String) = {
     val response = find(MongoDBObject(User.EMAIL -> email)).toList
@@ -21,14 +25,24 @@ with Logging{
     user
   }
 
-  def getUserById(id: String, loadPrivate:Boolean = false) = {
+  def getUserById(id: String, loadPrivate: Boolean = false) = {
     val response = find(MongoDBObject(Identifiable.ID -> new ObjectId(id))).toList
     val user = if (response != null && response.length > 0) {
-      if(!loadPrivate) response.head.password = null
+      if (!loadPrivate) response.head.password = null
       response.head
     }
     else null
     user
+  }
+
+  def getUsersPledgedForToday = {
+    val today = DateTime.now()
+    val users = find(MongoDBObject(
+      "$or" -> MongoDBList(
+        MongoDBObject(PLEDGE -> 0),
+        MongoDBObject(PLEDGE_DAY -> today.dayOfMonth()))),
+      MongoDBObject(PLEDGE_WEEKDAY -> today.dayOfWeek())).toList
+    users
   }
 
   def createUser(user: User) = {
@@ -38,5 +52,12 @@ with Logging{
     registered_user
   }
 
+  def incRating(id: String ) {
+    update(MongoDBObject(Identifiable.ID -> new ObjectId(id)), MongoDBObject("$inc" -> MongoDBObject(RATING -> 1)))
+  }
+
+  def decRating(id: String ) {
+    update(MongoDBObject(Identifiable.ID -> new ObjectId(id)), MongoDBObject("$inc" -> MongoDBObject(RATING -> -1)))
+  }
 
 }

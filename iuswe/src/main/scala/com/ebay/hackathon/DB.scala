@@ -1,6 +1,7 @@
 package com.ebay.hackathon
 
 import com.mongodb.casbah.commons.conversions.scala.RegisterJodaTimeConversionHelpers
+import com.mongodb.casbah.gridfs.GridFS
 import com.mongodb.casbah.{MongoClientURI, MongoClient}
 
 
@@ -15,5 +16,6 @@ object DB extends Logging {
     LOGGER.info(s"Connecting to mongo at $url/$db")
     MongoClient(MongoClientURI(url))(db)
   }
+  val gridFS = GridFS(connection)
   RegisterJodaTimeConversionHelpers()
 }

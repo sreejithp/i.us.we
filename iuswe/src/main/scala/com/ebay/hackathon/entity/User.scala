@@ -21,6 +21,9 @@ class UserCore[T] extends SerialisableEntity[T] {
   var pledgeDay: Int = 0
   var pledgeWeekDay: Int = 0
   var totalDonation: Int = 0
+  var totalCapacity: Int = 0
+  var rating: Int = 0
+  var loc: List[Double] = Nil
 
   import com.ebay.hackathon.entity.User._
 
@@ -35,6 +38,9 @@ class UserCore[T] extends SerialisableEntity[T] {
     builder += PLEDGE_DAY -> pledgeDay
     builder += PLEDGE_WEEKDAY -> pledgeWeekDay
     builder += TOTAL_DONATION -> totalDonation
+    builder += TOTAL_CAPACITY -> totalCapacity
+    builder += RATING -> rating
+    if (loc != Nil) builder += LOCATION -> loc
     builder.result()
   }
 
@@ -48,6 +54,9 @@ class UserCore[T] extends SerialisableEntity[T] {
     pledgeDay = getInt(dbObject, PLEDGE_DAY)
     pledgeWeekDay = getInt(dbObject, PLEDGE_WEEKDAY)
     totalDonation = getInt(dbObject, TOTAL_DONATION)
+    rating = getInt(dbObject, RATING)
+    totalCapacity = getInt(dbObject, TOTAL_CAPACITY)
+    loc = getPrimitiveList[Double](dbObject, LOCATION)
     this.asInstanceOf[T]
   }
 
@@ -57,6 +66,9 @@ object User {
   val NAME: String = "name"
   val EMAIL: String = "email"
   val PASSWORD: String = "password"
+  val RATING: String = "rating"
+  val LOCATION: String = "loc"
+  val TOTAL_CAPACITY: String = "totalCapacity"
   val ADDRESS: String = "address"
   val USER_TYPE: String = "userType"
   val PLEDGE: String = "pledge"
