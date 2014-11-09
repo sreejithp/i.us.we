@@ -1,6 +1,8 @@
 package com.ebay.hackathon.dao
 
+import com.ebay.hackathon.dao.NeedyDAO._
 import com.ebay.hackathon.entity.User
+import com.ebay.hackathon.entity.User.RATING
 import com.ebay.hackathon.entity.User._
 import com.ebay.hackathon.entity.traits.Identifiable
 import com.ebay.hackathon.{DB, Logging}
@@ -40,8 +42,8 @@ with Logging {
     val users = find(MongoDBObject(
       "$or" -> MongoDBList(
         MongoDBObject(PLEDGE -> 0),
-        MongoDBObject(PLEDGE_DAY -> today.dayOfMonth()))),
-      MongoDBObject(PLEDGE_WEEKDAY -> today.dayOfWeek())).toList
+        MongoDBObject(PLEDGE_DAY -> today.dayOfMonth().get()))),
+      MongoDBObject(PLEDGE_WEEKDAY -> today.dayOfWeek().get())).toList
     users
   }
 
@@ -58,6 +60,26 @@ with Logging {
 
   def decRating(id: String ) {
     update(MongoDBObject(Identifiable.ID -> new ObjectId(id)), MongoDBObject("$inc" -> MongoDBObject(RATING -> -1)))
+  }
+
+  def assignVolunteerToContributor(volId: String, id: ObjectId) = {
+    update(MongoDBObject(Identifiable.ID -> id), MongoDBObject("$set" -> MongoDBObject(VOLUNTEER_ID -> volId)))
+  }
+
+  def getContributorBasedOnVolunteers(volId: String) ={
+    find(MongoDBObject(VOLUNTEER_ID -> volId)).toList
+  }
+
+  def getContributors = {
+    find(MongoDBObject(USER_TYPE -> 0)).toList
+  }
+
+  def getVolunteers = {
+    find(MongoDBObject(USER_TYPE -> 1)).toList
+  }
+
+  def getAdmins = {
+    find(MongoDBObject(USER_TYPE -> 2)).toList
   }
 
 }
