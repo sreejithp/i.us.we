@@ -16,6 +16,6 @@ object DB extends Logging {
     LOGGER.info(s"Connecting to mongo at $url/$db")
     MongoClient(MongoClientURI(url))(db)
   }
-  val gridFS = GridFS(connection)
   RegisterJodaTimeConversionHelpers()
+  val gridFS = GridFS(connection)
 }
