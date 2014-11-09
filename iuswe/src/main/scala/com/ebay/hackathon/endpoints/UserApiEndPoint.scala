@@ -17,7 +17,27 @@ class UserApiEndPoint extends ApiEndpoint with HttpSessionSupport {
   }
 
   get("/email/:email") {
-    controller.getUserByEmail(requiredParam("id"))
+    controller.getUserByEmail(requiredParam("email"))
+  }
+
+  post("/assignVolunteer/:volId/contributor/:contributorId"){
+    controller.assignVolunteerToContributor(requiredParam("volId"),requiredParam("contributorId"))
+  }
+
+  get("/contributorsBasedOnVolunteer/:volId") {
+    controller.getContributorsBasedOnVolunteer(requiredParam("volId"))
+  }
+
+  get("/contributors") {
+    controller.getContributors
+  }
+
+  get("/volunteers") {
+    controller.getVolunteers
+  }
+
+  get("/admins") {
+    controller.getAdmins
   }
 
 

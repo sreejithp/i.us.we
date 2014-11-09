@@ -43,7 +43,11 @@ object AuthController extends HttpSessionSupport {
                userType: Int,
                pledge: Int,
                pledgeDay: Int,
-               pledgeWeekDay: Int)(implicit session: HttpSession): Response = {
+               pledgeWeekDay: Int,
+               lat: Double,
+               lng: Double,
+               totalCapacity:Int
+               )(implicit session: HttpSession): Response = {
     try {
       val user = new User()
       user.email = email
@@ -54,6 +58,8 @@ object AuthController extends HttpSessionSupport {
       user.pledgeDay = pledgeDay
       user.pledgeWeekDay = pledgeWeekDay
       user.password = password
+      user.totalCapacity = totalCapacity
+      user.loc = List(lat, lng)
 
       val registeredUser = UserDAO.createUser(user)
       setLoginSession(registeredUser)

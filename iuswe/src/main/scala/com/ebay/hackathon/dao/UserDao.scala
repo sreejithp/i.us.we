@@ -66,7 +66,7 @@ with Logging {
     update(MongoDBObject(Identifiable.ID -> id), MongoDBObject("$set" -> MongoDBObject(VOLUNTEER_ID -> volId)))
   }
 
-  def getContributorBasedOnVolunteers(volId: String) ={
+  def getContributorsBasedOnVolunteer(volId: String) ={
     find(MongoDBObject(VOLUNTEER_ID -> volId)).toList
   }
 
