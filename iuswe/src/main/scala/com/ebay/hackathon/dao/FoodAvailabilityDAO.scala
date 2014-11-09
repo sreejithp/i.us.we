@@ -25,7 +25,7 @@ with Logging {
     find(MongoDBObject(FoodAvailability.USER_ID -> userId, FoodAvailability.DATE -> DateTime.now())).toList
   }
 
-  def getFoodAvailabilityForDate(date: DateTime) = {
+  def getFoodAvailabilityForDate = {
     find(MongoDBObject(FoodAvailability.DATE -> DateTime.now())).toList
   }
 
