@@ -24,10 +24,21 @@ app.factory('AdminService', function ($q, $timeout, $log, $state, HttpService) {
         })
     };
 
-    var assignVolunteerTask = function (contributorId, needyId) {
+    var assignVolunteerTask = function (volunteerId, needyId) {
         return HttpService.post('/user/assignVolunteerTask', {
-            contributorId: contributorId,
+            contributorId: volunteerId,
             needyId: needyId}).then(function (response) {
+            return response;
+        })
+    };
+
+    var addNeedy = function (name, address, totalPeople, loc, volunteers) {
+        return HttpService.post('/user/createNeedy', {
+            name: name,
+            address: address,
+            totalPeople: totalPeople,
+            loc: loc,
+            volunteers: volunteers}).then(function (response) {
             return response;
         })
     };
@@ -37,7 +48,8 @@ app.factory('AdminService', function ($q, $timeout, $log, $state, HttpService) {
         getListOfContributors: getListOfContributors,
         getListOfVolunteers: getListOfVolunteers,
         getListOfNeedy: getListOfNeedy,
-        assignVolunteerTask: assignVolunteerTask
+        assignVolunteerTask: assignVolunteerTask,
+        addNeedy: addNeedy
     };
 
 });

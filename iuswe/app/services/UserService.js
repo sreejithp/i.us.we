@@ -27,9 +27,54 @@ app.factory('UserService', function ($q, $timeout, $log, $state, HttpService) {
         });
     };
 
+    var getMyPickupPoints = function (volunteerId) {
+        return HttpService.get('/user/myPickups', {volunteerId: volunteerId}).then(function (response) {
+            return response;
+        })
+    };
+
+    var getMyDeliveryPoints = function (volunteerId) {
+        return HttpService.get('/user/myDeliveries', {volunteerId: volunteerId}).then(function (response) {
+            return response;
+        })
+    };
+
+    var postDeliveryInfo = function (volunteerId, needyId, comments) {
+        return HttpService.post('/user/deliveryInfo', {
+            volunteerId: volunteerId,
+            needyId: needyId,
+            comments: comments}).then(function (response) {
+            return response;
+        })
+    };
+
+    var getMyDeliveryInfo = function (userId) {
+        return HttpService.get('/user/deliveryInfo', {userId: userId}).then(function (response) {
+            return response;
+        })
+    };
+
+    var getMyPledgeForToday = function (contributorId) {
+        return HttpService.get('/user/pledge', {contributorId: contributorId}).then(function (response) {
+            return response;
+        })
+    };
+
+    var updateFoodAvailabilityStatus = function (contributorId, status) {
+        return HttpService.post('/user/foodReady', {contributorId: contributorId, status: status}).then(function (response) {
+            return response;
+        })
+    };
+
     return {
         register: register,
-        signin: signin
+        signin: signin,
+        getMyPickupPoints: getMyPickupPoints,
+        getMyDeliveryPoints: getMyDeliveryPoints,
+        getMyPledgeForToday: getMyPledgeForToday,
+        getMyDeliveryInfo: getMyDeliveryInfo,
+        postDeliveryInfo: postDeliveryInfo,
+        updateFoodAvailabilityStatus: updateFoodAvailabilityStatus
     };
 
 });
