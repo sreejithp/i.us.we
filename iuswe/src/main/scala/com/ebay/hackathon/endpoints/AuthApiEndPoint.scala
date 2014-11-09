@@ -11,12 +11,12 @@ class AuthApiEndPoint extends ApiEndpoint {
   post("/register") {
     AuthController.register(requiredParam("email"),
                             requiredParam("password"),
-                            requiredParam("name"),
-                            requiredParam("address"),
-                            requiredIntParam("userType"),
-                            requiredIntParam("pledge"),
-                            requiredIntParam("pledgeDay"),
-                            requiredIntParam("pledgeWeekDay"))
+                            param("name"),
+                            param("address"),
+                            intParam("userType"),
+                            intParam("pledge"),
+                            intParam("pledgeDay"),
+                            intParam("pledgeWeekDay"))
   }
 
   post("/signin") {
