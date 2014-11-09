@@ -8,16 +8,15 @@ class MainServlet extends IusweStack with Logging{
 
   get("/") {
     LOGGER.info("getting home page")
-    contentType="text/html"
-    layoutTemplate("/WEB-INF/templates/views/app.ssp")
+    redirect("/home")
   }
 
   get("/home") {
-    app
+    app("/public/views/page-landing.html")
   }
 
-  def app = {
-    val input = getServletContext().getResourceAsStream("/public/views/page-landing.html")
+  def app(path: String) = {
+    val input = getServletContext().getResourceAsStream(path)
     contentType="text/html"
     scala.io.Source.fromInputStream(input).getLines().mkString("\n")
   }
