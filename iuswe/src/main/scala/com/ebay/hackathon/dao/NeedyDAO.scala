@@ -10,6 +10,9 @@ import org.bson.types.ObjectId
 object NeedyDAO extends BaseDAO[Needy, ObjectId](collection = DB.connection("needy"), entityClass = classOf[Needy])
 with Logging {
 
+    def createNeedy(needy:Needy): Unit ={
+      insert(needy)
+    }
 
 
 }
