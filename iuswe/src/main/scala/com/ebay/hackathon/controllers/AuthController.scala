@@ -2,7 +2,7 @@ package com.ebay.hackathon.controllers
 
 import javax.servlet.http.HttpSession
 
-import com.ebay.hackathon.dao.UserDao
+import com.ebay.hackathon.dao.UserDAO
 import com.ebay.hackathon.endpoints.{HttpSessionSupport, Response, StockResponses}
 import com.ebay.hackathon.entity.User
 import org.bson.types.ObjectId
@@ -14,7 +14,7 @@ object AuthController extends HttpSessionSupport {
   def directLogin(email: String, password: String)(implicit session: HttpSession): Response = {
     try {
       LOGGER.debug("Try user login " + email)
-      val user = UserDao.getUserByEmail(email)
+      val user = UserDAO.getUserByEmail(email)
 
       if (user == null) {
         LOGGER.warn("Login attempted for a user which does not exist: " + email)
@@ -55,7 +55,7 @@ object AuthController extends HttpSessionSupport {
       user.pledgeWeekDay = pledgeWeekDay
       user.password = password
 
-      val registeredUser = UserDao.createUser(user)
+      val registeredUser = UserDAO.createUser(user)
       setLoginSession(registeredUser)
       Response(registeredUser)
 
