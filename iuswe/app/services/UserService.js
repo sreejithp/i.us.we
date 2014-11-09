@@ -1,7 +1,7 @@
 app.factory('UserService', function ($q, $timeout, $log, $state, HttpService) {
 
     var signin = function (username, password) {
-        return HttpService.post('/auth/signin', {principal: username, password: password}).then(function (response) {
+        return HttpService.post('/auth/signin', {email: username, password: password}).then(function (response) {
             if (response.success)
                 $state.setAuthenticatedUser(response.result);
 
@@ -18,7 +18,10 @@ app.factory('UserService', function ($q, $timeout, $log, $state, HttpService) {
             userType: userType,
             pledge: pledge,
             pledgeDay: pledgeDay,
-            pledgeWeekDay: pledgeWeekDay}).then(function (response) {
+            pledgeWeekDay: pledgeWeekDay,
+            lat: latitude,
+            lng: longitude,
+            totalCapacity: totalCapacity}).then(function (response) {
             if (response.success)
                 $state.setAuthenticatedUser(response.result);
 

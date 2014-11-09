@@ -30,14 +30,20 @@ app.controller('HomePageController', function ($log, $scope, $routeParams, UserS
             $scope.input.latitude,
             $scope.input.longitude,
             $scope.input.totalCapacity).then(function(response){
-            $log.debug(response)
+            $log.debug(response);
+            if($scope.input.userType == 2) {
+                $location.path("/admin")
+            } else {
+                $location.path("/user")
+            }
         })
     };
 
-    $scope.signIn = function() {
-        $log.debug("cliced signIn");
-        UserService.signin("email", "password").then(function(response){
-            $log.debug(response)
+    $scope.signin = function() {
+        $log.debug("clicked signIn");
+        UserService.signin($scope.input.loginEmail, $scope.input.loginPassword).then(function(response){
+            $log.debug(response);
+            $location.path("/user");
         })
     };
 

@@ -210,7 +210,7 @@ app.factory('UserService', [
   function ($q, $timeout, $log, $state, HttpService) {
     var signin = function (username, password) {
       return HttpService.post('/auth/signin', {
-        principal: username,
+        email: username,
         password: password
       }).then(function (response) {
         if (response.success)
@@ -227,7 +227,10 @@ app.factory('UserService', [
         userType: userType,
         pledge: pledge,
         pledgeDay: pledgeDay,
-        pledgeWeekDay: pledgeWeekDay
+        pledgeWeekDay: pledgeWeekDay,
+        lat: latitude,
+        lng: longitude,
+        totalCapacity: totalCapacity
       }).then(function (response) {
         if (response.success)
           $state.setAuthenticatedUser(response.result);
@@ -309,12 +312,18 @@ app.controller('HomePageController', [
       }
       UserService.register($scope.input.registerEmail, $scope.input.registerPassword, $scope.input.registerName, $scope.input.registerAddress, $scope.input.userType, $scope.input.pledge, $scope.input.pledgeDay, $scope.input.pledgeWeekDay, $scope.input.latitude, $scope.input.longitude, $scope.input.totalCapacity).then(function (response) {
         $log.debug(response);
+        if ($scope.input.userType == 2) {
+          $location.path('/admin');
+        } else {
+          $location.path('/user');
+        }
       });
     };
-    $scope.signIn = function () {
-      $log.debug('cliced signIn');
-      UserService.signin('email', 'password').then(function (response) {
+    $scope.signin = function () {
+      $log.debug('clicked signIn');
+      UserService.signin($scope.input.loginEmail, $scope.input.loginPassword).then(function (response) {
         $log.debug(response);
+        $location.path('/user');
       });
     };
     $scope.forgotPassword = function () {
