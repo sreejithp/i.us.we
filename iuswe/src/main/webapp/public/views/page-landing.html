@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html ng-app="IUsWe">
 <head>
+    <base href="/">
     <meta charset="utf-8">
     <!-- Title here -->
     <title>I.Us.We</title>
@@ -20,6 +21,14 @@
     <link rel='stylesheet' href='/public/styles/style.css'/>
     <link rel='stylesheet' href='/public/styles/dialogs.min.css'/>
     <link rel='stylesheet' href='/public/font-awesome/4.2.0/css/font-awesome.min.css'/>
+    <script language="JavaScript">
+        window.AppProperties = {
+            baseUrl: 'http://127.0.0.1:8080'
+        };
+
+        window.AppProperties.isLoggedIn = window.AppProperties.loggedInUsername != null && window.AppProperties.loggedInUsername != 'null' && window.AppProperties.loggedInUsername != '';
+    </script>
+
 </head>
 
 <body>
@@ -27,7 +36,7 @@
 <!-- Form area -->
 <div class="admin-form" ng-controller="HomePageController">
     <!-- Widget starts -->
-    <div class="widget worange">
+    <div class="widget wblue">
         <!-- Widget head -->
         <div class="widget-head">
             <i class="fa fa-lock"></i> Login
@@ -55,7 +64,7 @@
                     <!-- Remember me checkbox and sign in button -->
                     <div class="form-group">
                         <div class="col-lg-9 col-lg-offset-3">
-                            <button type="submit" class="btn btn-primary" ng-click="signin()">Sign in</button>
+                            <button class="btn btn-primary" ng-click="signin()">Sign in</button>
                         </div>
                     </div>
                 </form>
@@ -67,7 +76,7 @@
 
         <div class="admin-form">
             <!-- Widget starts -->
-            <div class="widget wred">
+            <div class="widget wblue">
                 <div class="widget-head">
                     <i class="fa fa-lock"></i> Register
                 </div>
@@ -117,8 +126,9 @@
                                     <select class="form-control" ng-model="input.pledgeType">
                                         <option value="0">daily</option>
                                         <option value="1">Every Saturday</option>
-                                        <option value="2"><input type="number" ng-model="input.pledgeWeekDay"> of this Month</option>
+
                                     </select>
+                                    or <input type="number" ng-model="input.pledgeWeekDay"> Of the Month
                                 </div>
                             </div>
                             <div class="form-group">
@@ -130,15 +140,15 @@
                             <div class="form-group">
                                 <label class="control-label col-lg-3" for="Location">Location</label>
                                 <div class="col-lg-9" id="Location">
-                                    <input type="number" class="form-control" ng-model="input.latitude">
-                                    <input type="number" class="form-control" ng-model="input.longitude">
+                                    <input type="text" class="form-control" ng-model="input.latitude" placeholder="latitude">
+                                    <input type="text" class="form-control" ng-model="input.longitude" placeholder="longitude">
                                 </div>
                             </div>
 
                             <!-- Accept box and button s-->
                             <div class="form-group">
                                 <div class="col-lg-9 col-lg-offset-3">
-                                    <button type="submit" class="btn btn-primary" ng-click="signup()">Register</button>
+                                    <button class="btn btn-primary" ng-click="signup()">Register</button>
                                 </div>
                             </div>
                         </form>

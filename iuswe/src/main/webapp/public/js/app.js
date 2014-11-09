@@ -218,14 +218,13 @@ app.factory('UserService', [
         return response;
       });
     };
-    var register = function (email, password, name, address, location, pledge, pledgeDay, pledgeWeekDay) {
+    var register = function (email, password, name, address, userType, pledge, pledgeDay, pledgeWeekDay, latitude, longitude, totalCapacity) {
       return HttpService.post('/auth/register', {
         email: email,
         name: name,
         password: password,
         address: address,
-        location: location,
-        userType: 0,
+        userType: userType,
         pledge: pledge,
         pledgeDay: pledgeDay,
         pledgeWeekDay: pledgeWeekDay
@@ -291,11 +290,15 @@ app.controller('HomePageController', [
   'UserService',
   '$location',
   function ($log, $scope, $routeParams, UserService, $location) {
+    $log.debug('home page init');
     $scope.input = {};
     $scope.signup = function () {
       // Register user
       $log.debug('clicked register');
-      if ($scope.input.pledgeType == 0) {
+      if ($scope.input.pledgeWeekDay != undefined) {
+        $scope.input.pledge = 2;
+        $scope.input.pledgeDay = 0;
+      } else if ($scope.input.pledgeType == 0) {
         $scope.input.pledge = 0;
         $scope.input.pledgeDay = 0;
         $scope.input.pledgeWeekDay = 0;
@@ -303,10 +306,6 @@ app.controller('HomePageController', [
         $scope.input.pledge = 1;
         $scope.input.pledgeDay = 1;
         $scope.input.pledgeWeekDay = 0;
-      } else {
-        $scope.input.pledge = 2;
-        $scope.input.pledgeDay = 0;
-        $scope.input.pledgeWeekDay = 1;
       }
       UserService.register($scope.input.registerEmail, $scope.input.registerPassword, $scope.input.registerName, $scope.input.registerAddress, $scope.input.userType, $scope.input.pledge, $scope.input.pledgeDay, $scope.input.pledgeWeekDay, $scope.input.latitude, $scope.input.longitude, $scope.input.totalCapacity).then(function (response) {
         $log.debug(response);

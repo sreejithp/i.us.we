@@ -1,11 +1,15 @@
 app.controller('HomePageController', function ($log, $scope, $routeParams, UserService, $location) {
 
+    $log.debug("home page init");
     $scope.input = {};
     $scope.signup = function () {
         // Register user
         $log.debug("clicked register");
 
-        if($scope.input.pledgeType == 0) {
+        if($scope.input.pledgeWeekDay != undefined) {
+            $scope.input.pledge = 2;
+            $scope.input.pledgeDay = 0;
+        } else if($scope.input.pledgeType == 0) {
             $scope.input.pledge = 0;
             $scope.input.pledgeDay = 0;
             $scope.input.pledgeWeekDay = 0;
@@ -13,11 +17,8 @@ app.controller('HomePageController', function ($log, $scope, $routeParams, UserS
             $scope.input.pledge = 1;
             $scope.input.pledgeDay = 1;
             $scope.input.pledgeWeekDay = 0;
-        } else {
-            $scope.input.pledge = 2;
-            $scope.input.pledgeDay = 0;
-            $scope.input.pledgeWeekDay = 1;
         }
+
         UserService.register($scope.input.registerEmail,
             $scope.input.registerPassword,
             $scope.input.registerName,

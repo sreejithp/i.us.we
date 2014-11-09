@@ -9,14 +9,13 @@ app.factory('UserService', function ($q, $timeout, $log, $state, HttpService) {
         })
     };
 
-    var register = function (email, password, name, address, location, pledge, pledgeDay, pledgeWeekDay) {
+    var register = function (email, password, name, address, userType, pledge, pledgeDay, pledgeWeekDay, latitude, longitude, totalCapacity) {
         return HttpService.post('/auth/register', {
             email: email,
             name: name,
             password: password,
             address: address,
-            location: location,
-            userType: 0,
+            userType: userType,
             pledge: pledge,
             pledgeDay: pledgeDay,
             pledgeWeekDay: pledgeWeekDay}).then(function (response) {
