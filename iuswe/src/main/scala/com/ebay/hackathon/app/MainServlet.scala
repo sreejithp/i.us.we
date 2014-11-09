@@ -11,5 +11,10 @@ class MainServlet extends IusweStack with Logging{
     contentType="text/html"
     layoutTemplate("/WEB-INF/templates/views/app.ssp")
   }
-  
+
+  get("/home") {
+    contentType="text/html"
+    layoutTemplate("/WEB-INF/templates/views/app.ssp")
+  }
+
 }

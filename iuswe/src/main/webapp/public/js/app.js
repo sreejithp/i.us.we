@@ -289,7 +289,8 @@ app.controller('HomePageController', [
   '$scope',
   '$routeParams',
   'UserService',
-  function ($log, $scope, $routeParams, UserService) {
+  '$location',
+  function ($log, $scope, $routeParams, UserService, $location) {
     $scope.signup = function () {
       // Register user
       $log.debug('clicked register');
@@ -303,6 +304,10 @@ app.controller('HomePageController', [
         $log.debug(response);
       });
     };
+    $scope.forgotPassword = function () {
+      $log.debug('going away');
+      $location.path('/home');
+    };
   }
 ]);
 app.config([
@@ -310,11 +315,14 @@ app.config([
   '$locationProvider',
   function ($routeProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
-    $routeProvider.when('/view1', {
-      templateUrl: 'public/views/view1.html',
-      controller: 'View1Ctrl'
+    $routeProvider.when('/', {
+      templateUrl: '/public/views/page-landing.html',
+      controller: 'HomePageController'
+    }).when('/home', {
+      templateUrl: '/public/views/page-landing.html',
+      controller: 'HomePageController'
     }).when('/view2', {
-      templateUrl: 'public/views/view1.html',
+      templateUrl: '/public/views/view1.html',
       controller: 'View1Ctrl'
     }).otherwise({ redirectTo: '/' });
   }

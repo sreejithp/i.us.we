@@ -1,4 +1,4 @@
-app.controller('HomePageController', function ($log, $scope, $routeParams, UserService) {
+app.controller('HomePageController', function ($log, $scope, $routeParams, UserService, $location) {
 
     $scope.signup = function () {
         // Register user
@@ -13,5 +13,10 @@ app.controller('HomePageController', function ($log, $scope, $routeParams, UserS
         UserService.signin("email", "password").then(function(response){
             $log.debug(response)
         })
-    }
+    };
+
+    $scope.forgotPassword = function() {
+        $log.debug("going away");
+        $location.path("/home");
+    };
 });
