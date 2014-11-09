@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <!-- Title here -->
-    <title>Login - MetroKing</title>
+    <title>I.Us.We</title>
     <!-- Description, Keywords and Author -->
     <meta name="description" content="Your description">
     <meta name="keywords" content="Your,Keywords">
@@ -25,7 +25,7 @@
 <body>
 
 <!-- Form area -->
-<div class="admin-form">
+<div class="admin-form" ng-controller="HomePageController">
     <!-- Widget starts -->
     <div class="widget worange">
         <!-- Widget head -->
@@ -41,37 +41,117 @@
                     <div class="form-group">
                         <label class="control-label col-lg-3" for="inputEmail">Email</label>
                         <div class="col-lg-9">
-                            <input type="text" class="form-control" id="inputEmail" placeholder="Email">
+                            <input type="text" class="form-control" id="inputEmail" ng-model="input.loginEmail" placeholder="Email">
                         </div>
                     </div>
                     <!-- Password -->
                     <div class="form-group">
                         <label class="control-label col-lg-3" for="inputPassword">Password</label>
                         <div class="col-lg-9">
-                            <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                            <input type="password" class="form-control" id="inputPassword" ng-model="input.loginPassword" placeholder="Password">
                         </div>
                     </div>
+
                     <!-- Remember me checkbox and sign in button -->
                     <div class="form-group">
                         <div class="col-lg-9 col-lg-offset-3">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox"> Remember me
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-lg-9 col-lg-offset-3">
-                            <button type="submit" class="btn btn-danger">Sign in</button>
-                            <button type="reset" class="btn btn-default">Reset</button>
+                            <button type="submit" class="btn btn-primary" ng-click="signin()">Sign in</button>
                         </div>
                     </div>
                 </form>
                 <div class="clearfix"></div>
             </div>
         </div>
-        <div class="widget-foot">
-            Not Registred? <a href="#">Register here</a>
+
+        <!-- registration -->
+
+        <div class="admin-form">
+            <!-- Widget starts -->
+            <div class="widget wred">
+                <div class="widget-head">
+                    <i class="fa fa-lock"></i> Register
+                </div>
+                <div class="widget-content">
+                    <div class="padd">
+                        <form class="form-horizontal">
+                            <!-- Registration form starts -->
+                            <!-- Name -->
+                            <div class="form-group">
+                                <label class="control-label col-lg-3" for="name">Name</label>
+                                <div class="col-lg-9">
+                                    <input type="text" class="form-control" ng-model="input.registerName" id="name">
+                                </div>
+                            </div>
+                            <!-- Email -->
+                            <div class="form-group">
+                                <label class="control-label col-lg-3" for="email">Email</label>
+                                <div class="col-lg-9">
+                                    <input type="text" class="form-control" ng-model="input.registerEmail" id="email">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-lg-3" for="rPassword">Password</label>
+                                <div class="col-lg-9">
+                                    <input type="password" class="form-control" ng-model="input.registerPassword" id="rPassword">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-lg-3" for="address">Address</label>
+                                <div class="col-lg-9">
+                                    <input type="text" class="form-control" ng-model="input.registerAddress" id="address">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-lg-3" for="userType">I will</label>
+                                <div class="col-lg-9" id="userType">
+                                    <select class="form-control" ng-model="input.userType">
+                                        <option value="0">Donate Food</option>
+                                        <option value="1">Volunteer for IUsWe</option>
+                                        <option value="2">Admininster IUsWe</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-lg-3" for="pledge">Pledge</label>
+                                <div class="col-lg-9" id="Pledge">
+                                    <select class="form-control" ng-model="input.pledgeType">
+                                        <option value="0">daily</option>
+                                        <option value="1">Every Saturday</option>
+                                        <option value="2"><input type="number" ng-model="input.pledgeWeekDay"> of this Month</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-lg-3" for="totalCapacity">Quantity of hard food</label>
+                                <div class="col-lg-9">
+                                    <input type="number" class="form-control" ng-model="input.totalCapacity" id="totalCapacity">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-lg-3" for="Location">Location</label>
+                                <div class="col-lg-9" id="Location">
+                                    <input type="number" class="form-control" ng-model="input.latitude">
+                                    <input type="number" class="form-control" ng-model="input.longitude">
+                                </div>
+                            </div>
+
+                            <!-- Accept box and button s-->
+                            <div class="form-group">
+                                <div class="col-lg-9 col-lg-offset-3">
+                                    <button type="submit" class="btn btn-primary" ng-click="signup()">Register</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="widget-foot">
+                    Already Registred? <a href="login.html">Login</a>
+                </div>
+            </div>
         </div>
+
+        <!-- registration -->
+
     </div>
 </div>
 

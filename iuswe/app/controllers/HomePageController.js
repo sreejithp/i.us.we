@@ -1,9 +1,34 @@
 app.controller('HomePageController', function ($log, $scope, $routeParams, UserService, $location) {
 
+    $scope.input = {};
     $scope.signup = function () {
         // Register user
         $log.debug("clicked register");
-        UserService.register("randomEmail", "randomPassword", "name", "address", "location", 1, 1, 1).then(function(response){
+
+        if($scope.input.pledgeType == 0) {
+            $scope.input.pledge = 0;
+            $scope.input.pledgeDay = 0;
+            $scope.input.pledgeWeekDay = 0;
+        } else if($scope.input.pledgeType == 1){
+            $scope.input.pledge = 1;
+            $scope.input.pledgeDay = 1;
+            $scope.input.pledgeWeekDay = 0;
+        } else {
+            $scope.input.pledge = 2;
+            $scope.input.pledgeDay = 0;
+            $scope.input.pledgeWeekDay = 1;
+        }
+        UserService.register($scope.input.registerEmail,
+            $scope.input.registerPassword,
+            $scope.input.registerName,
+            $scope.input.registerAddress,
+            $scope.input.userType,
+            $scope.input.pledge,
+            $scope.input.pledgeDay,
+            $scope.input.pledgeWeekDay,
+            $scope.input.latitude,
+            $scope.input.longitude,
+            $scope.input.totalCapacity).then(function(response){
             $log.debug(response)
         })
     };
