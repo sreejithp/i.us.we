@@ -37,15 +37,15 @@ class DeliveryEndPoint extends ApiEndpoint with HttpSessionSupport with FileUplo
 
   }
 
-  get("/ContributorDeliveryInfo/:contributorId") {
+  get("/contributorDeliveryInfo/:contributorId") {
     controller.getContributorDeliveryInfo(requiredParam("contributorId"))
   }
 
-  get("/VolunteerDeliveryInfo/:contributorId") {
+  get("/volunteerDeliveryInfo/:contributorId") {
     controller.getVolunteerDeliveryInfo(requiredParam("contributorId"))
   }
 
-  get("/DeliveryInfoBasedOnDate/:date") {
+  get("/deliveryInfoBasedOnDate/:date") {
     controller.getDeliveryInfoBasedOnDate(requiredDateParam("date"))
   }
 

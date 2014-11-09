@@ -3,7 +3,7 @@ package com.ebay.hackathon.controllers
 import java.util.Date
 import javax.servlet.http.HttpSession
 
-import com.ebay.hackathon.dao.DeliveryInfoDAO
+import com.ebay.hackathon.dao.{UserDAO, DeliveryInfoDAO}
 import com.ebay.hackathon.endpoints.{BaseController, Response}
 import com.ebay.hackathon.entity.DeliveryInfo
 import org.joda.time.DateTime
@@ -21,7 +21,6 @@ class DeliveryController(signedInUser: String) extends BaseController(signedInUs
                       needyId: String,
                       photosIds: List[String])(implicit session: HttpSession): Response = requireSignIn {
     respond("addDeliveryInfo") {
-
       val deliveryInfo = new DeliveryInfo()
       deliveryInfo.name = name
       deliveryInfo.address = address
@@ -30,8 +29,7 @@ class DeliveryController(signedInUser: String) extends BaseController(signedInUs
       deliveryInfo.volunteerId = volunteerId
       deliveryInfo.deliveryDate = DateTime.now()
       deliveryInfo.photosIds = photosIds
-
-      //Add contributors
+      deliveryInfo.contributorIds = UserDAO.getContributorsBasedOnVolunteer(volunteerId).map(_.id)
       DeliveryInfoDAO.addDeliveryInfo(deliveryInfo)
     }
   }
@@ -53,6 +51,5 @@ class DeliveryController(signedInUser: String) extends BaseController(signedInUs
       DeliveryInfoDAO.getDeliveryInfoBasedOnDate(new DateTime(date))
     }
   }
-
 
 }
